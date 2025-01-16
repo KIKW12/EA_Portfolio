@@ -8,7 +8,7 @@ export const Hero = () => {
       <div className="container mx-auto px-6 py-20">
         <div className="text-center animate-fade-in">
           <h1 className="text-4xl md:text-6xl font-bold text-secondary-900 dark:text-white mb-6">
-            Hi, I'm <span className="text-primary-600 dark:text-primary-400">Enrique Ayala</span>
+            Hi, I&apos;m <span className="text-primary-600 dark:text-primary-400">Enrique Ayala</span>
           </h1>
           <p className="text-xl md:text-2xl text-secondary-600 dark:text-secondary-300 mb-8 animate-slide-up">
             A Computer Science Student & Back-End Developer

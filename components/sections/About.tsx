@@ -11,12 +11,12 @@ export const About = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 animate-slide-up">
             <p className="text-secondary-600 dark:text-secondary-300">
-              I'm a Computer Science student at Monterrey's Institute of Technology, passionate about back-end development
+              I&apos;m a Computer Science student at Monterrey&apos;s Institute of Technology, passionate about back-end development
               and cybersecurity. With a strong foundation in various programming languages and frameworks, I enjoy creating
               efficient and secure solutions to complex problems.
             </p>
             <p className="text-secondary-600 dark:text-secondary-300">
-              Currently maintaining a GPA of 96.35/100, I've been recognized with an Academic Talent Scholarship and have
+              Currently maintaining a GPA of 96.35/100, I&apos;ve been recognized with an Academic Talent Scholarship and have
               completed specialized programs in Cybersecurity and Mathematics for Machine Learning.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -31,15 +31,15 @@ export const About = () => {
               </div>
             </div>
           </div>
-            <div className="relative h-[600px] md:h-[800px] w-full rounded-lg overflow-hidden animate-fade-in">
-              <Image
-                src="/profile.jpg"
-                alt="Enrique Ayala"
-                fill
-                className="object-contain" // Changed from object-cover to object-contain
-                priority
-              />
-            </div>
+          <div className="relative h-[600px] md:h-[800px] w-full rounded-lg overflow-hidden animate-fade-in">
+            <Image
+              src="/profile.jpg"
+              alt="Enrique Ayala"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
         </div>
       </div>
     </section>
