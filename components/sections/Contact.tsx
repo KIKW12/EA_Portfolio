@@ -1,18 +1,65 @@
 // components/sections/Contact.tsx
 import { useState } from 'react';
-import { Send } from 'lucide-react';
+import { Send, Loader2 } from 'lucide-react';
+
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
 
 export const Contact = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     message: ''
   });
+
+  const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     setStatus('loading');
+    setErrorMessage('');
 
     try {
       const response = await fetch('/api/contact', {
@@ -23,14 +70,28 @@ export const Contact = () => {
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setStatus('error');
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
       }
+
+      setStatus('success');
+      setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       setStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'Something went wrong');
+    }
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing
+    if (errors[name as keyof FormErrors]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
@@ -52,12 +113,20 @@ export const Contact = () => {
               <input
                 type="text"
                 id="name"
+                name="name"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                required
-                className="w-full px-4 py-2 rounded-lg border border-secondary-200 dark:border-secondary-700 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
+                onChange={handleChange}
+                className={`w-full px-4 py-2 rounded-lg border ${
+                  errors.name 
+                    ? 'border-red-500 dark:border-red-400' 
+                    : 'border-secondary-200 dark:border-secondary-700'
+                } bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors`}
               />
+              {errors.name && (
+                <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.name}</p>
+              )}
             </div>
+
             <div>
               <label 
                 htmlFor="email"
@@ -68,12 +137,20 @@ export const Contact = () => {
               <input
                 type="email"
                 id="email"
+                name="email"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                required
-                className="w-full px-4 py-2 rounded-lg border border-secondary-200 dark:border-secondary-700 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
+                onChange={handleChange}
+                className={`w-full px-4 py-2 rounded-lg border ${
+                  errors.email 
+                    ? 'border-red-500 dark:border-red-400' 
+                    : 'border-secondary-200 dark:border-secondary-700'
+                } bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors`}
               />
+              {errors.email && (
+                <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.email}</p>
+              )}
             </div>
+
             <div>
               <label 
                 htmlFor="message"
@@ -83,20 +160,37 @@ export const Contact = () => {
               </label>
               <textarea
                 id="message"
+                name="message"
                 value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                required
+                onChange={handleChange}
                 rows={5}
-                className="w-full px-4 py-2 rounded-lg border border-secondary-200 dark:border-secondary-700 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
+                className={`w-full px-4 py-2 rounded-lg border ${
+                  errors.message 
+                    ? 'border-red-500 dark:border-red-400' 
+                    : 'border-secondary-200 dark:border-secondary-700'
+                } bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors`}
               />
+              {errors.message && (
+                <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.message}</p>
+              )}
             </div>
+
             <button
               type="submit"
               disabled={status === 'loading'}
               className="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg flex items-center justify-center space-x-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span>Send Message</span>
-              <Send className="w-4 h-4" />
+              {status === 'loading' ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Sending...</span>
+                </>
+              ) : (
+                <>
+                  <span>Send Message</span>
+                  <Send className="w-4 h-4" />
+                </>
+              )}
             </button>
             
             {status === 'success' && (
@@ -107,7 +201,7 @@ export const Contact = () => {
             
             {status === 'error' && (
               <div className="p-4 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 rounded-lg animate-slide-up">
-                Failed to send message. Please try again.
+                {errorMessage || 'Failed to send message. Please try again.'}
               </div>
             )}
           </form>
