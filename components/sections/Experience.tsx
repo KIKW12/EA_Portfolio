@@ -4,10 +4,24 @@ import { ExperienceType } from '../../types';
 
 const experienceData: ExperienceType[] = [
   {
+    title: "CTO & Co-founder",
+    company: "Neural Harvest",
+    location: "Querétaro, MX",
+    date: "February 2025 - Present",
+    website: "https://www.neuralharvest.com",
+    description: [
+      "Leading technical strategy and development of AI-powered agricultural solutions",
+      "Managing a team of developers and data scientists",
+      "Architecting scalable machine learning infrastructure",
+      "Developing computer vision algorithms for crop analysis"
+    ]
+  },
+  {
     title: "Back-End Developer",
     company: "ceams.co",
     location: "Querétaro, MX",
-    date: "March 2024 - Present",
+    date: "March 2024 - February 2025",
+    website: "https://ceams.co",
     description: [
       "Developed and maintained back-end infrastructure using Node.js and MySQL",
       "Improved website loading times by optimizing server-side operations",
@@ -45,9 +59,24 @@ export const Experience = () => {
                 <h3 className="text-xl font-semibold text-secondary-900 dark:text-white">
                   {exp.title}
                 </h3>
-                <span className="text-primary-600 dark:text-primary-400">
-                  @{exp.company}
-                </span>
+                {exp.website ? (
+                  <a 
+                    href={exp.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary-600 dark:text-primary-400 hover:underline cursor-pointer"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.open(exp.website, '_blank', 'noopener,noreferrer');
+                    }}
+                  >
+                    @{exp.company}
+                  </a>
+                ) : (
+                  <span className="text-primary-600 dark:text-primary-400">
+                    @{exp.company}
+                  </span>
+                )}
               </div>
               <div className="flex flex-wrap gap-4 text-secondary-600 dark:text-secondary-400 mb-4">
                 <div className="flex items-center gap-2">

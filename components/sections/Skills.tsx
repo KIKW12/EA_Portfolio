@@ -51,12 +51,12 @@ const skills: SkillsData = {
     {
       name: "React",
       icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg",
-      proficiency: "Intermediate" as const
+      proficiency: "Proficient" as const
     },
     {
       name: "Node.js",
       icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg",
-      proficiency: "Intermediate" as const
+      proficiency: "Proficient" as const
     },
     {
       name: "TensorFlow",
@@ -71,7 +71,7 @@ const skills: SkillsData = {
     {
       name: "WordPress",
       icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/wordpress/wordpress-plain.svg",
-      proficiency: "Intermediate" as const
+      proficiency: "Proficient" as const
     },
     {
       name: "Bootstrap",
@@ -83,7 +83,7 @@ const skills: SkillsData = {
     {
       name: "Git",
       icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg",
-      proficiency: "Intermediate" as const
+      proficiency: "Proficient" as const
     },
     {
       name: "Docker",
@@ -93,7 +93,7 @@ const skills: SkillsData = {
     {
       name: "Google Cloud",
       icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg",
-      proficiency: "Intermediate" as const
+      proficiency: "Proficient" as const
     },
     {
       name: "VS Code",

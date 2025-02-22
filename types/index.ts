@@ -14,6 +14,7 @@ export interface Project {
     location: string;
     date: string;
     description: string[];
+    website?: string;  // Optional website URL
   }
   
   export interface Education {
