@@ -13,7 +13,6 @@ const experienceData: ExperienceType[] = [
       "Leading technical strategy and development of AI-powered agricultural solutions",
       "Managing a team of developers and data scientists",
       "Architecting scalable machine learning infrastructure",
-      "Developing computer vision algorithms for crop analysis"
     ]
   },
   {
