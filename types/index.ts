@@ -31,3 +31,5 @@ export interface Project {
     icon: string;
     proficiency: 'Beginner' | 'Intermediate' | 'Proficient';
   }
+
+  // asdawdas
