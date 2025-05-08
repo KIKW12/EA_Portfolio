@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>New Contact Form Submission</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif, Arial;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .message-container {
+            margin-top: 20px;
+            padding: 15px 0;
+            border-width: 1px 0;
+            border-style: dashed;
+            border-color: lightgrey;
+        }
+        .profile-icon {
+            padding: 6px 10px;
+            margin: 0 10px;
+            background-color: aliceblue;
+            border-radius: 5px;
+            font-size: 26px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .message-content {
+            display: inline-block;
+            vertical-align: top;
+            max-width: 85%;
+        }
+        .sender-name {
+            color: #2c3e50;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .timestamp {
+            color: #cccccc;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        .message-text {
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+        .header {
+            margin-bottom: 15px;
+        }
+        .email-info {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>A message by <strong>{{name}}</strong> has been received. Kindly respond at your earliest convenience.</div>
+        </div>
+        
+        <div class="message-container">
+            <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%;">
+                <tr>
+                    <td style="vertical-align: top; width: 50px;">
+                        <div class="profile-icon" role="img">&#x1F464;</div>
+                    </td>
+                    <td style="vertical-align: top;">
+                        <div class="sender-name">{{name}}</div>
+                        <div class="timestamp">{{send_date}}</div>
+                        <p class="message-text">{{message}}</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="email-info">
+            <p><strong>Email:</strong> {{email}}</p>
+            <p><strong>Subject:</strong> {{title}}</p>
+        </div>
+    </div>
+</body>
+</html>

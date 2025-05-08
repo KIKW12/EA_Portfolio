@@ -1,29 +1,43 @@
 // components/sections/Contact.tsx
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Send, Loader2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 interface FormData {
   name: string;
   email: string;
   message: string;
+  title: string; // Added title field for email template
 }
 
 interface FormErrors {
   name?: string;
   email?: string;
   message?: string;
+  title?: string;
 }
 
 export const Contact = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    title: 'Portfolio Contact Form Message' // Default subject/title
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
+
+  // Initialize EmailJS once when component mounts
+  useEffect(() => {
+    // Use environment variable for EmailJS public key
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init(publicKey);
+    }
+  }, []);
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -41,6 +55,10 @@ export const Contact = () => {
       newErrors.email = 'Email is required';
     } else if (!validateEmail(formData.email)) {
       newErrors.email = 'Please enter a valid email';
+    }
+
+    if (!formData.title.trim()) {
+      newErrors.title = 'Subject is required';
     }
 
     if (!formData.message.trim()) {
@@ -62,22 +80,55 @@ export const Contact = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      // Using EmailJS to send the email directly from the client with environment variables
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const notificationTemplateId = process.env.NEXT_PUBLIC_EMAILJS_NOTIFICATION_TEMPLATE_ID;
+      const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+      
+      if (!serviceId || !templateId || !notificationTemplateId || !adminEmail) {
+        throw new Error('EmailJS configuration is missing');
+      }
+      
+      // Prepare template parameters (match the template variables)
+      const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        title: formData.title,
+        send_date: new Date().toLocaleString() // Format: MM/DD/YYYY, HH:MM:SS AM/PM
+      };
+      
+      // Send confirmation email to the user
+      const userResult = await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams
+      );
 
-      const data = await response.json();
+      // Send notification email to admin (you)
+      const adminParams = {
+        ...templateParams,
+        to_email: adminEmail  // Make sure this matches the variable in your notification template
+      };
+      
+      const adminResult = await emailjs.send(
+        serviceId,
+        notificationTemplateId,
+        adminParams
+      );
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
+      if (userResult.text !== 'OK' || adminResult.text !== 'OK') {
+        throw new Error('Failed to send one or more messages');
       }
 
       setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ 
+        name: '', 
+        email: '', 
+        message: '',
+        title: 'Portfolio Contact Form Message' // Reset with default title
+      });
     } catch (error) {
       setStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'Something went wrong');
@@ -102,7 +153,7 @@ export const Contact = () => {
           Get in Touch
         </h2>
         <div className="max-w-2xl mx-auto">
-          <form onSubmit={handleSubmit} className="space-y-6 animate-fade-in">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 animate-fade-in">
             <div>
               <label 
                 htmlFor="name"
@@ -153,6 +204,30 @@ export const Contact = () => {
 
             <div>
               <label 
+                htmlFor="title"
+                className="block text-secondary-700 dark:text-secondary-300 mb-2"
+              >
+                Subject
+              </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 rounded-lg border ${
+                  errors.title 
+                    ? 'border-red-500 dark:border-red-400' 
+                    : 'border-secondary-200 dark:border-secondary-700'
+                } bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors`}
+              />
+              {errors.title && (
+                <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.title}</p>
+              )}
+            </div>
+
+            <div>
+              <label 
                 htmlFor="message"
                 className="block text-secondary-700 dark:text-secondary-300 mb-2"
               >
@@ -178,17 +253,17 @@ export const Contact = () => {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg flex items-center justify-center space-x-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 px-6 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg flex justify-center items-center gap-2 transition-colors disabled:bg-primary-400 dark:disabled:bg-primary-800"
             >
               {status === 'loading' ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Sending...</span>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Sending...
                 </>
               ) : (
                 <>
-                  <span>Send Message</span>
-                  <Send className="w-4 h-4" />
+                  <Send className="w-5 h-5" />
+                  Send Message
                 </>
               )}
             </button>
