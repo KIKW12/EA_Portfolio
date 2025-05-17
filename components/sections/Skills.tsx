@@ -96,6 +96,16 @@ const skills: SkillsData = {
       proficiency: "Proficient" as const
     },
     {
+      name: "Prisma",
+      icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/prisma/prisma-original.svg",
+      proficiency: "Intermediate" as const
+    },
+    {
+      name: "GraphQL",
+      icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/graphql/graphql-plain.svg",
+      proficiency: "Intermediate" as const
+    },
+    {
       name: "VS Code",
       icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg",
       proficiency: "Proficient" as const
