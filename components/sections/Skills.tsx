@@ -136,6 +136,16 @@ const skills: SkillsData = {
       name: "Matplotlib",
       icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg",
       proficiency: "Proficient" as const
+    },
+    {
+      name: "Threading",
+      icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg",
+      proficiency: "Proficient" as const
+    },
+    {
+      name: "Jest",
+      icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/jest/jest-plain.svg",
+      proficiency: "Intermediate" as const
     }
   ]
 };

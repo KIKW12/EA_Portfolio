@@ -4,6 +4,12 @@ import { Project } from '../../types';
 
 const projects: Project[] = [
   {
+    title: "Via Alta - Academic Enrollment Management System",
+    description: "Enterprise-level full-stack web application for academic institution management. Features automated student enrollment with prerequisite validation, genetic algorithm-powered schedule generation with conflict resolution, multi-role authentication, and coordinator dashboard. Reduced manual enrollment processing by 80% and eliminated scheduling conflicts through automated validation. Built with Next.js 15, React 19, TypeScript, PostgreSQL, and deployed on cloud infrastructure.",
+    technologies: ["Next.js", "React", "TypeScript", "PostgreSQL", "Node.js", "Tailwind CSS", "Genetic Algorithm", "OAuth2", "Heroku"],
+    github: "https://github.com/MateoMinghi/via_alta"
+  },
+  {
     title: "Marsquakes Detection Model",
     description: "An unsupervised machine learning model developed for NASA Space Apps Challenge that identifies potential 'Marsquakes' from InSight Lander data. The project included data cleansing, non-seismic signal elimination, and energy optimization based on rotation angle. Achieved 2nd place in the local event.",
     technologies: ["Python", "Machine Learning", "Data Analysis", "Signal Processing"],

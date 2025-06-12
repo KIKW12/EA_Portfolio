@@ -17,9 +17,9 @@ const experienceData: ExperienceType[] = [
   },
   {
     title: "Back-End Developer",
-    company: "ceams.co",
+    company: "CEAMS - Digital Solutions",
     location: "Querétaro, MX",
-    date: "March 2024 - February 2025",
+    date: "March 2024 - May 2025",
     website: "https://ceams.co",
     description: [
       "Developed and maintained back-end infrastructure using Node.js and MySQL",
