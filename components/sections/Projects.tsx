@@ -10,16 +10,22 @@ const projects: Project[] = [
     github: "https://github.com/MateoMinghi/via_alta"
   },
   {
+    title: "COVID-19 Variant Analysis: Computational Biology Project",
+    description: "Comprehensive bioinformatics analysis of COVID-19 variants and coronaviruses using advanced computational biology techniques. Features phylogenetic tree construction, statistical modeling with bootstrap validation, sequence analysis, and evolutionary distance calculations. Analyzed 10+ viral variants with TN93 and JC69 models, achieving >95% confidence intervals. Demonstrates proficiency in R programming, bioinformatics, and statistical analysis essential for biotechnology and pharmaceutical research.",
+    technologies: ["R", "Bioconductor", "Phylogenetics", "Statistical Modeling", "Biostrings", "ggplot2", "Bootstrap Analysis", "DNA Sequencing"],
+    github: "https://github.com/KIKW12/covid-variants-analysis"
+  },
+  {
     title: "Marsquakes Detection Model",
     description: "An unsupervised machine learning model developed for NASA Space Apps Challenge that identifies potential 'Marsquakes' from InSight Lander data. The project included data cleansing, non-seismic signal elimination, and energy optimization based on rotation angle. Achieved 2nd place in the local event.",
     technologies: ["Python", "Machine Learning", "Data Analysis", "Signal Processing"],
     github: "https://github.com/KIKW12/Seismic-Detection-in-Space"
   },
   {
-    title: "Python Password Generator",
-    description: "A secure password generator with customizable criteria including length, character types, and prime number integration using the 6k±1 prime test.",
-    technologies: ["Python", "Cryptography", "Algorithm Design"],
-    github: "https://github.com/KIKW12/Password-Generator-Python"
+    title: "Advanced Password Generator",
+    description: "Enterprise-grade C++ password generator with cryptographically secure algorithms and prime number integration. Features object-oriented design with inheritance, polymorphism, and design patterns (Strategy, Template Method). Implements optimized prime generation, memory-safe RAII principles, and cross-platform compatibility. Demonstrates advanced C++ skills, security-first design, and clean architecture following SOLID principles.",
+    technologies: ["C++", "Object-Oriented Programming", "Cryptography", "Design Patterns", "Security", "RAII", "STL", "Prime Algorithms"],
+    github: "https://github.com/KIKW12/Password-Generator-CPP"
   },
   {
     title: "Restaurant Management System",
