@@ -34,10 +34,18 @@ const projects: Project[] = [
     github: "https://github.com/KIKW12/Restaurant-Managment-System"
   },
   {
-    title: "Phishing Website Classifier",
-    description: "Machine learning-based system for detecting phishing websites using TensorFlow and advanced feature extraction. Includes data preprocessing, cleaning, and feature engineering.",
-    technologies: ["Python", "TensorFlow", "Pandas", "Scikit-learn"],
-    github: "https://github.com/KIKW12/Phishing_Website_Classifier"
+    title: "Bloombly — Wildflower Bloom Prediction",
+    description: "Predicts wildflower bloom timing using satellite data, ecological feature engineering (NDVI, GDD, soil moisture), and ML models. Built for the NASA Space Apps Challenge with GeoJSON outputs and globe visualization.",
+    technologies: [
+      "Python",
+      "Flask",
+      "scikit-learn",
+      "Google Earth Engine",
+      "pandas",
+      "numpy",
+    ],
+    github: "https://github.com/KIKW12/bloombly",
+    link: "https://bloomly.earth"
   }
 ];
 
