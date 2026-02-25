@@ -28,10 +28,17 @@ const projects: Project[] = [
     github: "https://github.com/KIKW12/Password-Generator-CPP"
   },
   {
-    title: "Restaurant Management System",
-    description: "A comprehensive restaurant management system with admin panel, order management, and secure authentication. Built using object-oriented principles for scalability and maintenance.",
-    technologies: ["C++", "Object-Oriented Programming", "Database Design"],
-    github: "https://github.com/KIKW12/Restaurant-Managment-System"
+    title: "Sentinel — AI-Powered Autonomous Security Scanner",
+    description: "Deploys a coordinated swarm of 10 specialized AI agents to autonomously scan web applications for vulnerabilities. Features a Spider agent for attack surface mapping, SQL injection and XSS fuzzers with verification, an autonomous Red Team agent with full browser control via Playwright, and a Gemini-powered LLM analysis engine that chains low-severity findings into high-impact attack paths. Built at TreeHacks 2026 (Stanford).",
+    technologies: ["Python", "Next.js", "TypeScript", "Flask", "Gemini AI", "Playwright", "Supabase", "asyncio"],
+    github: "https://github.com/KIKW12/sentinelTH2026"
+  },
+  {
+    title: "Prometheus — AI-Powered Recruitment Platform",
+    description: "Full-stack conversational AI recruitment platform that replaces traditional hiring with real-time, natural language candidate search. Features a LangGraph agent powered by Gemini 2.5 Flash with progressive multi-turn filtering, semantic skill matching via Gemini Embeddings, bidirectional culture fit scoring, tenure stability analysis, and WhatsApp-first outreach through Twilio. From search to scheduled meeting in under 2 minutes.",
+    technologies: ["Python", "Next.js", "TypeScript", "Flask", "Gemini AI", "LangGraph", "Supabase", "Twilio"],
+    github: "https://github.com/KIKW12/Prometheus",
+    link: "https://prometheus.enayala.dev"
   },
   {
     title: "Bloombly — Wildflower Bloom Prediction",
