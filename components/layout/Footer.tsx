@@ -3,34 +3,37 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 
 export const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-secondary-900 py-8 transition-colors duration-300">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-secondary-600 dark:text-secondary-400">
-            © 2025 Enrique Ayala. All rights reserved.
+    <footer className="border-t border-border bg-base py-8">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-dim font-mono text-xs tracking-wider">
+            © {new Date().getFullYear()} Enrique Ayala
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex items-center gap-6">
             <a
               href="https://github.com/KIKW12"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-secondary-600 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              className="flex items-center gap-2 text-muted hover:text-accent transition-colors duration-300 cursor-pointer group"
             >
-              <Github className="w-6 h-6" />
+              <Github className="w-4 h-4" />
+              <span className="font-mono text-xs hidden sm:inline group-hover:text-accent">GitHub</span>
             </a>
             <a
               href="https://linkedin.com/in/enayala"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-secondary-600 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              className="flex items-center gap-2 text-muted hover:text-accent transition-colors duration-300 cursor-pointer group"
             >
-              <Linkedin className="w-6 h-6" />
+              <Linkedin className="w-4 h-4" />
+              <span className="font-mono text-xs hidden sm:inline group-hover:text-accent">LinkedIn</span>
             </a>
             <a
               href="mailto:hello@enayala.me"
-              className="text-secondary-600 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              className="flex items-center gap-2 text-muted hover:text-accent transition-colors duration-300 cursor-pointer group"
             >
-              <Mail className="w-6 h-6" />
+              <Mail className="w-4 h-4" />
+              <span className="font-mono text-xs hidden sm:inline group-hover:text-accent">Email</span>
             </a>
           </div>
         </div>

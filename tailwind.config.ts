@@ -11,35 +11,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#fffde7',
-          100: '#fffccc',
-          200: '#fff9b3',
-          300: '#fff799',
-          400: '#fff480',
-          500: '#fee715', // Main yellow color
-          600: '#e6d013',
-          700: '#ccb811',
-          800: '#b39f0f',
-          900: '#99870d',
+        base: '#0a0a0f',
+        surface: '#111118',
+        'surface-raised': '#18181f',
+        accent: {
+          DEFAULT: '#fee715',
+          muted: 'rgba(254, 231, 21, 0.15)',
+          glow: 'rgba(254, 231, 21, 0.4)',
         },
-        secondary: {
-          50: '#e2e3e5',
-          100: '#c6c8cc',
-          200: '#a9acb2',
-          300: '#8d9099',
-          400: '#70747f',
-          500: '#545866',
-          600: '#37384c',
-          700: '#2a2b3a',
-          800: '#1c1e27',
-          900: '#101820', // Main dark color
+        border: {
+          DEFAULT: 'rgba(255, 255, 255, 0.06)',
+          hover: 'rgba(255, 255, 255, 0.12)',
         },
+        muted: '#6b6b7b',
+        dim: '#3d3d4a',
+      },
+      fontFamily: {
+        display: ['Space Grotesk', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.5s ease-out',
-        'slide-down': 'slideDown 0.5s ease-out',
+        'fade-in': 'fadeIn 0.6s ease-out forwards',
+        'slide-up': 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'slide-down': 'slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
       },
       keyframes: {
         fadeIn: {

@@ -1,5 +1,5 @@
 // components/sections/Experience.tsx
-import { Building2, Calendar, MapPin } from 'lucide-react';
+import { Calendar, MapPin } from 'lucide-react';
 import { ExperienceType } from '../../types';
 
 const experienceData: ExperienceType[] = [
@@ -42,58 +42,76 @@ const experienceData: ExperienceType[] = [
 
 export const Experience = () => {
   return (
-    <section id="experience" className="py-20 bg-primary-50 dark:bg-secondary-800 transition-colors duration-300">
-      <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 dark:text-white mb-12 text-center">
+    <section id="experience" className="py-24 md:py-32 bg-surface">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Section Label */}
+        <p className="font-mono text-xs tracking-[0.3em] text-dim uppercase mb-4 reveal-up">
+          02 — Experience
+        </p>
+        <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-16 reveal-up">
           Experience
         </h2>
-        <div className="space-y-8">
-          {experienceData.map((exp, index) => (
-            <div 
-              key={index}
-              className="bg-white dark:bg-secondary-900 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 animate-slide-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="flex flex-wrap gap-4 mb-4">
-                <h3 className="text-xl font-semibold text-secondary-900 dark:text-white">
-                  {exp.title}
-                </h3>
-                {exp.website ? (
-                  <a 
-                    href={exp.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary-600 dark:text-primary-400 hover:underline cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.open(exp.website, '_blank', 'noopener,noreferrer');
-                    }}
-                  >
-                    @{exp.company}
-                  </a>
-                ) : (
-                  <span className="text-primary-600 dark:text-primary-400">
-                    @{exp.company}
-                  </span>
-                )}
-              </div>
-              <div className="flex flex-wrap gap-4 text-secondary-600 dark:text-secondary-400 mb-4">
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4" />
-                  <span>{exp.date}</span>
+
+        {/* Timeline */}
+        <div className="relative pl-12 md:pl-16">
+          {/* Vertical line */}
+          <div className="timeline-line" />
+
+          <div className="space-y-12">
+            {experienceData.map((exp, index) => (
+              <div key={index} className="relative reveal-up">
+                {/* Timeline dot */}
+                <div className="timeline-dot" style={{ top: '8px' }} />
+
+                {/* Card */}
+                <div className="glass rounded-xl p-6 md:p-8 hover:border-accent/10 transition-all duration-500 group">
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
+                    <h3 className="text-lg md:text-xl font-display font-semibold text-white">
+                      {exp.title}
+                    </h3>
+                    {exp.website ? (
+                      <a
+                        href={exp.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-sm text-accent hover:underline cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.open(exp.website, '_blank', 'noopener,noreferrer');
+                        }}
+                      >
+                        @{exp.company}
+                      </a>
+                    ) : (
+                      <span className="font-mono text-sm text-accent">
+                        @{exp.company}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex flex-wrap gap-4 text-dim font-mono text-xs mb-4">
+                    <div className="flex items-center gap-1.5">
+                      <Calendar className="w-3 h-3" />
+                      <span>{exp.date}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <MapPin className="w-3 h-3" />
+                      <span>{exp.location}</span>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-2">
+                    {exp.description.map((desc, i) => (
+                      <li key={i} className="flex items-start gap-3 text-muted text-sm leading-relaxed">
+                        <span className="w-1 h-1 rounded-full bg-accent mt-2 flex-shrink-0" />
+                        {desc}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  <span>{exp.location}</span>
-                </div>
               </div>
-              <ul className="list-disc list-inside space-y-2 text-secondary-600 dark:text-secondary-300">
-                {exp.description.map((desc, i) => (
-                  <li key={i}>{desc}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

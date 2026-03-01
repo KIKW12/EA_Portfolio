@@ -3,60 +3,116 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 
+const navLinks = [
+  { href: '/#about', label: 'About' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/#projects', label: 'Projects' },
+  { href: '/#skills', label: 'Skills' },
+  { href: '/#contact', label: 'Contact' },
+];
+
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+  const [scrolled, setScrolled] = useState(false);
 
-  // Always set dark mode on mount
   useEffect(() => {
     document.documentElement.classList.add('dark');
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    // Intersection Observer for active section
+    const sections = document.querySelectorAll('section[id]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
-    <header className="fixed w-full bg-secondary-900 z-50 transition-colors duration-300">
-      <nav className="container mx-auto px-6 py-4">
+    <header
+      className={`fixed top-4 left-4 right-4 z-50 rounded-2xl transition-all duration-500 ${scrolled
+          ? 'glass shadow-lg shadow-black/20'
+          : 'bg-transparent border border-transparent'
+        }`}
+    >
+      <nav className="max-w-7xl mx-auto px-6 py-3">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-primary-400">
-            EA
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-0.5 group">
+            <span className="text-xl font-bold font-display text-white tracking-tight">
+              EA
+            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-accent group-hover:scale-150 transition-transform duration-300" />
           </Link>
 
-          <div className="hidden md:flex items-center space-x-8">
-            <Link href="/#about" className="text-secondary-300 hover:text-primary-400 transition-colors">
-              About
-            </Link>
-            <Link href="/#experience" className="text-secondary-300 hover:text-primary-400 transition-colors">
-              Experience
-            </Link>
-            <Link href="/#projects" className="text-secondary-300 hover:text-primary-400 transition-colors">
-              Projects
-            </Link>
-            <Link href="/#contact" className="text-secondary-300 hover:text-primary-400 transition-colors">
-              Contact
-            </Link>
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const sectionId = link.href.replace('/#', '');
+              const isActive = activeSection === sectionId;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative px-4 py-2 text-sm font-mono transition-colors duration-300 cursor-pointer ${isActive
+                      ? 'text-accent'
+                      : 'text-muted hover:text-white'
+                    }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent" />
+                  )}
+                </Link>
+              );
+            })}
           </div>
 
+          {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 text-muted hover:text-white transition-colors cursor-pointer"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden pt-4 pb-3 space-y-3 animate-slide-down">
-            <Link href="/#about" className="block text-secondary-300 hover:text-primary-400 transition-colors">
-              About
-            </Link>
-            <Link href="/#experience" className="block text-secondary-300 hover:text-primary-400 transition-colors">
-              Experience
-            </Link>
-            <Link href="/#projects" className="block text-secondary-300 hover:text-primary-400 transition-colors">
-              Projects
-            </Link>
-            <Link href="/#contact" className="block text-secondary-300 hover:text-primary-400 transition-colors">
-              Contact
-            </Link>
+          <div className="md:hidden pt-4 pb-3 space-y-1 animate-slide-down border-t border-border mt-3">
+            {navLinks.map((link) => {
+              const sectionId = link.href.replace('/#', '');
+              const isActive = activeSection === sectionId;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block px-4 py-2 text-sm font-mono transition-colors cursor-pointer ${isActive ? 'text-accent' : 'text-muted hover:text-white'
+                    }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
         )}
       </nav>
