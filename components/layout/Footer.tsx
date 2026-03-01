@@ -29,7 +29,7 @@ export const Footer = () => {
               <span className="font-mono text-xs hidden sm:inline group-hover:text-accent">LinkedIn</span>
             </a>
             <a
-              href="mailto:hello@enayala.me"
+              href="mailto:enayala12@gmail.com"
               className="flex items-center gap-2 text-muted hover:text-accent transition-colors duration-300 cursor-pointer group"
             >
               <Mail className="w-4 h-4" />

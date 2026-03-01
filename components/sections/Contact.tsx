@@ -129,13 +129,13 @@ export const Contact = () => {
             {/* Social Links */}
             <div className="space-y-4">
               <a
-                href="mailto:hello@enayala.me"
+                href="mailto:enayala12@gmail.com"
                 className="flex items-center gap-3 text-muted hover:text-accent transition-colors duration-300 cursor-pointer group"
               >
                 <div className="w-10 h-10 rounded-lg border border-border flex items-center justify-center group-hover:border-accent/30 transition-colors">
                   <Mail className="w-4 h-4" />
                 </div>
-                <span className="font-mono text-sm">hello@enayala.me</span>
+                <span className="font-mono text-sm">enayala12@gmail.com</span>
               </a>
               <a
                 href="https://github.com/KIKW12"
