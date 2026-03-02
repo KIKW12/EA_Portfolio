@@ -27,7 +27,7 @@ const projects: Project[] = [
     title: "Via Alta",
     description: "Enterprise-level academic enrollment management system. Automated student enrollment with prerequisite validation, genetic algorithm-powered schedule generation, multi-role authentication, and coordinator dashboard. Reduced manual processing by 80%.",
     technologies: ["Next.js", "React", "TypeScript", "PostgreSQL", "Node.js", "Tailwind CSS", "Genetic Algorithm", "OAuth2"],
-    github: "https://github.com/MateoMinghi/via_alta"
+    github: "https://github.com/KIKW12/via_alta"
   },
   {
     title: "COVID-19 Variant Analysis",
