@@ -11,6 +11,12 @@ if (typeof window !== 'undefined') {
 
 const projects: Project[] = [
   {
+    title: "OrbitGrow",
+    description: "Autonomous Martian greenhouse AI agent network for STARTHack 2026. Orchestrates 5 specialized Claude-powered agents (Nutrition, Environment, Crisis, Planner, Vision) to manage crop allocation, prevent crises, and feed 4 astronauts for 450 sols. Features a real-time digital twin dashboard, MCP-grounded reasoning via Syngenta Knowledge Base, and serverless AWS deployment.",
+    technologies: ["Python", "React", "FastAPI", "AWS Bedrock", "Claude AI", "DynamoDB", "AWS SAM", "OpenCV"],
+    github: "https://github.com/KIKW12/OrbitGrow_StartHack"
+  },
+  {
     title: "Prometheus",
     description: "Full-stack conversational AI recruitment platform. LangGraph agent powered by Gemini 2.5 Flash with progressive multi-turn filtering, semantic skill matching, bidirectional culture fit scoring, and WhatsApp-first outreach through Twilio.",
     technologies: ["Python", "Next.js", "TypeScript", "Flask", "Gemini AI", "LangGraph", "Supabase", "Twilio"],
