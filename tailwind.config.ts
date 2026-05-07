@@ -11,42 +11,50 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        base: '#0a0a0f',
-        surface: '#111118',
-        'surface-raised': '#18181f',
-        accent: {
-          DEFAULT: '#fee715',
-          muted: 'rgba(254, 231, 21, 0.15)',
-          glow: 'rgba(254, 231, 21, 0.4)',
+        // Obsidian & Bone palette
+        obsidian: '#0B0B0C',
+        ink: '#0F0F11',
+        raised: '#141416',
+        elevated: '#1A1A1D',
+        bone: '#EDE7DA',
+        ash: '#9A958B',
+        graphite: '#6F6E6A',
+        slate: '#3F3E3B',
+        hairline: 'rgba(237, 231, 218, 0.08)',
+        'hairline-strong': 'rgba(237, 231, 218, 0.16)',
+        sage: {
+          DEFAULT: '#7CA982',
+          dim: '#5A8466',
+          glow: 'rgba(124, 169, 130, 0.15)',
         },
-        border: {
-          DEFAULT: 'rgba(255, 255, 255, 0.06)',
-          hover: 'rgba(255, 255, 255, 0.12)',
-        },
-        muted: '#6b6b7b',
-        dim: '#3d3d4a',
       },
       fontFamily: {
-        display: ['Space Grotesk', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        display: ['Fraunces', 'Georgia', 'serif'],
+        sans: ['"Inter Tight"', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
+      letterSpacing: {
+        editorial: '-0.04em',
+        wide05: '0.05em',
+        widest3: '0.3em',
       },
       animation: {
-        'fade-in': 'fadeIn 0.6s ease-out forwards',
-        'slide-up': 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'slide-down': 'slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'fade-in': 'fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'rule-grow': 'ruleGrow 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'caret-blink': 'caretBlink 1.1s step-end infinite',
       },
       keyframes: {
         fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+          '0%': { opacity: '0', transform: 'translateY(12px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+        ruleGrow: {
+          '0%': { transform: 'scaleX(0)' },
+          '100%': { transform: 'scaleX(1)' },
         },
-        slideDown: {
-          '0%': { transform: 'translateY(-20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+        caretBlink: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' },
         },
       },
     },

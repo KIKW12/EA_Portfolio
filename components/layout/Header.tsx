@@ -1,14 +1,12 @@
 // components/layout/Header.tsx
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { href: '/#about', label: 'About' },
-  { href: '/#experience', label: 'Experience' },
-  { href: '/#projects', label: 'Projects' },
-  { href: '/#skills', label: 'Skills' },
-  { href: '/#contact', label: 'Contact' },
+  { href: '/#work', label: 'Work', idx: '01' },
+  { href: '/#about', label: 'About', idx: '02' },
+  { href: '/#practice', label: 'Practice', idx: '03' },
+  { href: '/#contact', label: 'Contact', idx: '04' },
 ];
 
 export const Header = () => {
@@ -19,25 +17,20 @@ export const Header = () => {
   useEffect(() => {
     document.documentElement.classList.add('dark');
 
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 24);
 
-    // Intersection Observer for active section
     const sections = document.querySelectorAll('section[id]');
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
         });
       },
       { rootMargin: '-40% 0px -55% 0px' }
     );
 
     sections.forEach((section) => observer.observe(section));
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       observer.disconnect();
@@ -47,23 +40,23 @@ export const Header = () => {
 
   return (
     <header
-      className={`fixed top-4 left-4 right-4 z-50 rounded-2xl transition-all duration-500 ${scrolled
-          ? 'glass shadow-lg shadow-black/20'
-          : 'bg-transparent border border-transparent'
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'bg-obsidian/80 backdrop-blur-md border-b border-hairline'
+          : 'bg-transparent border-b border-transparent'
+      }`}
     >
-      <nav className="max-w-7xl mx-auto px-6 py-3">
+      <nav className="max-w-[1400px] mx-auto px-6 md:px-10 py-5">
         <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-0.5 group">
-            <span className="text-xl font-bold font-display text-white tracking-tight">
-              EA
+          {/* Mark */}
+          <Link href="/" className="group flex items-center gap-2">
+            <span className="font-display text-bone text-lg tracking-editorial leading-none">
+              Enrique <span className="serif-italic text-sage">Ayala</span>
             </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-accent group-hover:scale-150 transition-transform duration-300" />
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => {
               const sectionId = link.href.replace('/#', '');
               const isActive = activeSection === sectionId;
@@ -71,48 +64,58 @@ export const Header = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative px-4 py-2 text-sm font-mono transition-colors duration-300 cursor-pointer ${isActive
-                      ? 'text-accent'
-                      : 'text-muted hover:text-white'
-                    }`}
+                  className={`group flex items-baseline gap-2 text-sm transition-colors duration-300 ${
+                    isActive ? 'text-bone' : 'text-graphite hover:text-bone'
+                  }`}
                 >
-                  {link.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent" />
-                  )}
+                  <span className="font-mono text-[10px] tracking-widest text-slate group-hover:text-graphite transition-colors">
+                    {link.idx}
+                  </span>
+                  <span className="font-sans">{link.label}</span>
                 </Link>
               );
             })}
+            <a
+              href="/resume.pdf"
+              download
+              className="ml-4 font-mono text-[11px] tracking-[0.18em] uppercase text-bone border-b border-hairline-strong pb-0.5 hover:border-sage hover:text-sage transition-colors duration-300"
+            >
+              CV ↓
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile button */}
           <button
-            className="md:hidden p-2 text-muted hover:text-white transition-colors cursor-pointer"
+            className="md:hidden flex flex-col gap-1.5 p-2 -mr-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            <span className={`block w-5 h-px bg-bone transition-transform ${isMenuOpen ? 'translate-y-[3px] rotate-45' : ''}`} />
+            <span className={`block w-5 h-px bg-bone transition-transform ${isMenuOpen ? '-translate-y-[3px] -rotate-45' : ''}`} />
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden pt-4 pb-3 space-y-1 animate-slide-down border-t border-border mt-3">
-            {navLinks.map((link) => {
-              const sectionId = link.href.replace('/#', '');
-              const isActive = activeSection === sectionId;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block px-4 py-2 text-sm font-mono transition-colors cursor-pointer ${isActive ? 'text-accent' : 'text-muted hover:text-white'
-                    }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
+          <div className="md:hidden pt-6 pb-4 space-y-4 border-t border-hairline mt-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-baseline gap-3 text-bone"
+              >
+                <span className="font-mono text-[10px] tracking-widest text-slate">{link.idx}</span>
+                <span className="font-display text-2xl tracking-editorial">{link.label}</span>
+              </Link>
+            ))}
+            <a
+              href="/resume.pdf"
+              download
+              className="block pt-3 font-mono text-[11px] tracking-[0.18em] uppercase text-sage"
+            >
+              Download CV ↓
+            </a>
           </div>
         )}
       </nav>

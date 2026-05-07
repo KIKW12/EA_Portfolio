@@ -1,20 +1,18 @@
 // pages/index.tsx
 import { Layout } from '../components/layout/Layout';
 import { Hero } from '../components/sections/Hero';
-import { About } from '../components/sections/About';
-import { Experience } from '../components/sections/Experience';
 import { Projects } from '../components/sections/Projects';
-import { Skills } from '../components/sections/Skills';
+import { About } from '../components/sections/About';
+import { Practice } from '../components/sections/Practice';
 import { Contact } from '../components/sections/Contact';
 
 export default function Home() {
   return (
     <Layout>
       <Hero />
-      <About />
-      <Experience />
       <Projects />
-      <Skills />
+      <About />
+      <Practice />
       <Contact />
     </Layout>
   );
